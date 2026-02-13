@@ -11,8 +11,8 @@ foreach (string input_number in input_numbers)
     Console.WriteLine("\n double value is: " + double_value);
     output_numbers += "double value is: " + double_value.ToString() + "\n";
 }
-File.AppendAllText("output_double_value.txt", string.Join("\n", output_numbers));
-string f_path = Path.GetFullPath("output_double_value.txt");
+File.AppendAllText("calc.txt", string.Join("\n", output_numbers));
+string f_path = Path.GetFullPath("calc.txt");
 Console.WriteLine(f_path);
 
 
