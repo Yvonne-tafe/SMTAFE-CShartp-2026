@@ -16,6 +16,22 @@ namespace At1___WpfApp___Fu_lan__Yvonne__Chen
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    public class Vehicle
+    {
+        public string Rego { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public string Color { get; set; }
+        public Boolean HasAirbag { get; set; }
+        public void Drive_Vehicle()
+        {
+            MessageBox.Show("the vehicle is driving");
+        }
+        public void Stop_Vehicle()
+        {
+            MessageBox.Show("the vehicle is stopping");
+        }
+    }
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -25,30 +41,38 @@ namespace At1___WpfApp___Fu_lan__Yvonne__Chen
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // See https://aka.ms/new-console-template for more information
-            //using System.Runtime.CompilerServices;
-            //SaveFileDialog saveFileDialog = new SaveFileDialog();
-            //saveFileDialog.FileName = "Output_from_WPH.txt";
-            //if (saveFileDialog.ShowDialog() == true)
-            //{
-            //    string f_path = saveFileDialog.FileName;
-            //}
-            //string input_numbers_string = Console.ReadLine();
-            string input_numbers_string = Number_one.Text + "," + Number_two.Text;
-            string[] input_numbers = input_numbers_string.Split(',');
-            string output_numbers = "";
-            MessageBox.Show("Here");
-            foreach (string input_number in input_numbers)
+            Vehicle new_vehicle = new Vehicle();
+            new_vehicle.Rego = rego.Text;
+            new_vehicle.Brand = brand.Text;
+            new_vehicle.Model = model.Text;
+            new_vehicle.Color = color.Text;
+            ComboBoxItem v_sirbag = (ComboBoxItem) hasairbag.SelectedItem;
+            if (v_sirbag.Tag.ToString() == "1")
             {
-                double double_value = Convert.ToDouble(input_number);
-                //Console.WriteLine("\n double value is: " + double_value);
-                output_numbers += "double value is: " + double_value.ToString() + "\n";
+                new_vehicle.HasAirbag = true;
+            } else
+            {
+                new_vehicle.HasAirbag = false;
             }
-            MessageBox.Show(output_numbers);
-            File.AppendAllText("output_double_value.txt", string.Join("\n", output_numbers));
-            string f_path = System.IO.Path.GetFullPath("output_double_value.txt");
-            MessageBox.Show("Saved to " + f_path);
-
+            vehicle_add_info(new_vehicle);
         }
+        private void vehicle_add_info(Vehicle new_vehicle)
+        {
+            string vehicle_info = "Information of the Vehicle: \n";
+            vehicle_info += "Rego: " + new_vehicle.Rego + "\n";
+            vehicle_info += "Brand: " + new_vehicle.Brand + "\n";
+            vehicle_info += "Model: " + new_vehicle.Model + "\n";
+            vehicle_info += "Color: " + new_vehicle.Model + "\n";
+            if (new_vehicle.HasAirbag)
+            {
+                vehicle_info += "HasAirBag: Yes;" + "\n";
+            } else
+            {
+                vehicle_info += "HasAirBag: No;" + "\n";
+            }
+            File.AppendAllText("Vehicle_info.txt", string.Join("\n", vehicle_info));
+            MessageBox.Show("Vehicle Added");
+        }
+
     }
 }

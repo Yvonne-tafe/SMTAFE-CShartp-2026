@@ -11,12 +11,21 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="126,88,0,0" TextWrapping="Wrap" Text="Please enter 2 numbers..." VerticalAlignment="Top"/>
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,136,0,0" TextWrapping="Wrap" Text="Number 1" VerticalAlignment="Top"/>
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,182,0,0" TextWrapping="Wrap" Text="Number 2" VerticalAlignment="Top"/>
-        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="244,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="Number_one"/>
-        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="275,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="Number_two"/>
-        <Button Content="convert and save" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="494,190,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="126,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331"><Run Text="Please enter "/><Run Text="the following "/><Run Text="information to bukd a vehicle "/><Run Language="zh-tw" Text="class"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="zh-tw" Text="Rego"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="zh-tw" Text="Brand"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="zh-tw" Text="Model"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="zh-tw" Text="color"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="151,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="zh-tw" Text="AirBag"/></TextBlock>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="244,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="rego"/>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="244,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="brand"/>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="244,210,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="model"/>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="244,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="color"/>
+        <Button Content="Save the vehivle" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="464,285,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="20" Margin="244,280,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Name="hasairbag">
+            <ComboBoxItem Content="Yes" Tag="1" />
+            <ComboBoxItem Content="No" Tag="0" />
+        </ComboBox>
 
     </Grid>
 </Window>
