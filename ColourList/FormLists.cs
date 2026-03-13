@@ -44,6 +44,7 @@ namespace MyLists
                 ColorHexCodeList.Add(new ColorData(textBoxInput.Text, ColorHexCode.Text));
                 DisplayList();
                 textBoxInput.Clear();
+                ColorHexCode.Clear();
                 textBoxInput.Focus();
             }
             else
@@ -58,15 +59,7 @@ namespace MyLists
             else
                 return true;
         }
-        private string GetTextBoxInput(string TextBoxInput)
-        {
-            int colonIndex = TextBoxInput.IndexOf(';');
-            if (colonIndex > 0)
-            {
-                return TextBoxInput.Substring(0, colonIndex).Trim();
-            }
-            return "";
-        }
+        
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(textBoxInput.Text)
@@ -77,6 +70,7 @@ namespace MyLists
                 ColorHexCodeList[listBoxDisplay.SelectedIndex].Name = textBoxInput.Text;
                 ColorHexCodeList[listBoxDisplay.SelectedIndex].HexCode = ColorHexCode.Text;
                 textBoxInput.Clear();
+                ColorHexCode.Clear();
                 DisplayList();
             }
             else
@@ -109,14 +103,28 @@ namespace MyLists
         }
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
-            ColorHexCodeList.Sort((x, y) => string.Compare(x.Name, y.Name));
-            ColorData Keyword = new ColorData(GetTextBoxInput(textBoxInput.Text), "");
 
-            if (ColorHexCodeList.BinarySearch(Keyword, Comparer<ColorData>.Create((x, y) => x.Name.CompareTo(y.Name))) >= 0)
-                labelErrorMsg.Text = "The colour: "+ Keyword.Name + " has been found";
+            if (string.IsNullOrWhiteSpace(textBoxInput.Text))
+            {
+                labelErrorMsg.Text = "No txet input to search";
+                return;
+            }
+
+            ColorHexCodeList.Sort((x, y) => string.Compare(x.Name, y.Name));
+            ColorData Keyword = new ColorData(textBoxInput.Text.Trim(), "");
+            //MessageBox.Show("Searching for: " + Keyword.Name);
+
+            int SearchResult = ColorHexCodeList.BinarySearch(Keyword, Comparer<ColorData>.Create((x, y) => x.Name.CompareTo(y.Name)));
+            if (SearchResult >= 0)
+            {
+                labelErrorMsg.Text = "The colour: " + Keyword.Name + " has been found";
+                listBoxDisplay.SelectedIndex = SearchResult;
+            }
             else
                 labelErrorMsg.Text = "Colour "+ Keyword.Name + " Not Found";
+
             textBoxInput.Clear();
+            ColorHexCode.Clear();
         }
         private void TextBoxInput_MouseDoubleClick(object sender, MouseEventArgs e)
         {
