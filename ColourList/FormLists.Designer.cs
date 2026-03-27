@@ -63,7 +63,7 @@ namespace MyLists
             this.buttonSearch.Location = new System.Drawing.Point(156, 121);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(93, 23);
-            this.buttonSearch.TabIndex = 2;
+            this.buttonSearch.TabIndex = 3;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
@@ -73,7 +73,7 @@ namespace MyLists
             this.buttonAdd.Location = new System.Drawing.Point(156, 151);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(93, 23);
-            this.buttonAdd.TabIndex = 3;
+            this.buttonAdd.TabIndex = 4;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -93,7 +93,7 @@ namespace MyLists
             this.buttonEdit.Location = new System.Drawing.Point(156, 180);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(93, 23);
-            this.buttonEdit.TabIndex = 7;
+            this.buttonEdit.TabIndex = 5;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
@@ -132,7 +132,7 @@ namespace MyLists
             this.ColorHexCode.Location = new System.Drawing.Point(156, 80);
             this.ColorHexCode.Name = "ColorHexCode";
             this.ColorHexCode.Size = new System.Drawing.Size(93, 20);
-            this.ColorHexCode.TabIndex = 1;
+            this.ColorHexCode.TabIndex = 2;
             this.ColorHexCode.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxInput_MouseDoubleClick);
             // 
             // FormLists
