@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../../../OneDrive/桌面/tafe_course/C#/AT1/sensor1_all.csv" />
+    <File Path="../../../OneDrive/桌面/tafe_course/C#/AT1/sensor2_all.csv" />
+    <File Path="../../../OneDrive/桌面/tafe_course/C#/AT1/sensor3_all.csv" />
+    <File Path="../../../OneDrive/桌面/tafe_course/C#/AT1/SensorFiles.csv" />
+  </Folder>
+  <Project Path="Soil Sensor Dashboard/Soil Sensor Dashboard.csproj" />
+</Solution>
