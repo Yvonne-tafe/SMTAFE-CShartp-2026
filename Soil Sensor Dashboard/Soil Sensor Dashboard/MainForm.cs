@@ -30,17 +30,30 @@ namespace Soil_Sensor_Dashboard
         {
             InitializeComponent();
             // TODO:
-            sensorDataGridView.DataBindingComplete += sensorDataGridView_DataBindingComplete;
+            //sensorDataGridView.DataBindingComplete += sensorDataGridView_DataBindingComplete;
             initMainForm();
         }
         private void initMainForm()
         {
             loadedFiles = new List<DataFile>();
-            LoadFile();
+            // Error - proofing here
+            if (!LoadFile(out string msg))
+            {
+                messageService.ShowError(msg);
+                Environment.Exit(0);
+                return;
+            }
 
-            // TODO:
-            originalData = loadedFiles.FirstOrDefault()?.OriginalData;
-            currentDisplayData = loadedFiles.FirstOrDefault()?.CurrentDisplayData;
+            // Error - proofing here
+            var firstItem = loadedFiles.FirstOrDefault();
+            if (firstItem == null)
+            {
+                messageService.ShowError("system initial failed");
+                Environment.Exit(0);
+                return;
+            }
+            originalData = firstItem.OriginalData;
+            currentDisplayData = firstItem.CurrentDisplayData;
 
             UIinit();
         }
@@ -64,35 +77,64 @@ namespace Soil_Sensor_Dashboard
         private void GetStartAndEndTime()
         {
             dataProcessor.SortByTimestamp(currentDisplayData);
-            endTime = currentDisplayData.FirstOrDefault()?.CreateTime ?? DateTime.Today;
-            startTime = currentDisplayData.LastOrDefault()?.CreateTime ?? DateTime.Today; ;
+            //Error - proofing here
+            var firstItem = currentDisplayData.FirstOrDefault();
+            var lastItem = currentDisplayData.LastOrDefault();
+            if (firstItem == null || lastItem == null)
+            {
+                messageService.ShowError("Time initila error");
+            }
+
+            endTime = firstItem?.CreateTime ?? DateTime.Today;
+            startTime = lastItem?.CreateTime ?? DateTime.Today; ;
         }
-        private void LoadFile()
+        private bool LoadFile(out string msg)
         {
             loadedFiles = new List<DataFile>();
             string path = Path.Combine(Application.StartupPath, SensorFileName);
+            //Error - proofing here
+            if (!File.Exists(path))
+            {
+                msg = $"Default Data missing";
+                return false; 
+            }
+
             var lines = File.ReadAllLines(path);
             for (int i = 1; i < lines.Length; i++) // skip header
             {
+                //Error - proofing here
+                if (string.IsNullOrWhiteSpace(lines[i])) continue;
+
                 var parts = lines[i].Split(',');
-                //Debug.WriteLine("Parts[2]: "+parts[2]);
+
+                //Error - proofing here
+                if (parts.Length < 3) continue;
+
                 if (parts[2] == "default")
                 {
-                    if (!fileManager.LoadFile(Path.Combine(Application.StartupPath, parts[0]), loadedFiles, out string msg))
-                        messageService.ShowError(msg);
+                    if (!fileManager.LoadFile(Path.Combine(Application.StartupPath, parts[0]), loadedFiles, out msg))
+                    {
+                        return false;
+                    }
                 }
             }
+            msg = $"Succeeded";
+            return true;
         }
         private void LoadBinFile_Click(object sender, EventArgs e)
         {
-            LoadBinFile();
+            if (!LoadBinFile(out string msg))
+            {
+                messageService.ShowError(msg);
+            } else
+            {
+                messageService.ShowAction(msg);
+            }
         }
-        private void LoadBinFile()
+        private bool LoadBinFile(out string msg)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Title = "Select the loading File (.bin)";
-
                 string defaultFolder = Path.Combine(Application.StartupPath, StoreFolderName);
 
                 // create defaultFolder if not existiing
@@ -110,21 +152,26 @@ namespace Soil_Sensor_Dashboard
                 //show diolog
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-
                     loadedFiles = new List<DataFile>();
-                    if (!fileManager.LoadBinFile(openFileDialog.FileName, loadedFiles, out string msg))
+                    if (!fileManager.LoadBinFile(openFileDialog.FileName, loadedFiles, out msg))
                     {
-                        messageService.ShowError(msg);
-                        return;
+                        return false;
                     }
-                    // TODO: 
-                    originalData = loadedFiles.FirstOrDefault().OriginalData;
-                    currentDisplayData = loadedFiles.FirstOrDefault().CurrentDisplayData;
+                    // Error - proofing here
+                    var firstItem = loadedFiles.FirstOrDefault();
+                    if (firstItem == null)
+                    {
+                        msg = $"bin file loading error!";
+                        return false;
+                    }
+                    originalData = firstItem.OriginalData;
+                    currentDisplayData = firstItem.CurrentDisplayData;
                     currentFileIndex = 0;
 
                     UIinit();
-                    messageService.ShowAction($"File loaded!");
                 }
+                msg = $"File loaded!";
+                return true;
             }
         }
         private void sensorDataGridView_DataBindingComplete(
