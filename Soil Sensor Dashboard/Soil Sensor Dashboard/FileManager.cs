@@ -62,9 +62,15 @@ namespace Soil_Sensor_Dashboard
             {
                 byte[] binData = File.ReadAllBytes(filePath);
                 string jsonString = Encoding.UTF8.GetString(binData);
+
                 List<SensorData>? data = JsonSerializer.Deserialize<List<SensorData>>(jsonString);
-                // TODO:
-                loadedFiles.Add(new DataFile(filePath, data.FirstOrDefault().SensorID, data, data));
+                if (data == null)
+                {
+                    throw new Exception("loading data error");
+                }
+
+                var firstItem = data.FirstOrDefault() ?? throw new Exception("Data list is empty");
+                loadedFiles.Add(new DataFile(filePath, firstItem.SensorID, data, data.ToList()));
 
                 msg = $"Succeeded";
                 return true;
