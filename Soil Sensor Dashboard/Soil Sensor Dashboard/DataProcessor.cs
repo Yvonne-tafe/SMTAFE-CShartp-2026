@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.DirectoryServices;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Soil_Sensor_Dashboard
         private static DataProcessor instance;
         private DataProcessor()
         {
-            // init
+            // init if need
         }
         public static DataProcessor GetInstance()
         {
@@ -35,7 +36,6 @@ namespace Soil_Sensor_Dashboard
                 int Mid = (Low + High) / 2;
                 if (TargetTime.Date == data[Mid].CreateTime.Date)
                 {
-                    //Debug.WriteLine($"TargetTime.Date: {TargetTime.Date}, data[Mid].CreateTime.Date:{data[Mid].CreateTime.Date}");
                     int step = -1;
                     if (!isFirst) step = 1;
                     while (Mid+step < data.Count && Mid+step >= 0 && data[Mid].CreateTime.Date == data[Mid + 1].CreateTime.Date)
@@ -59,9 +59,12 @@ namespace Soil_Sensor_Dashboard
         public List<SensorData> FileterByTimestampRange(List<SensorData> data, DateTime starttime, DateTime endtime)
         {
             SortByTimestamp(data);
-            // TODO: add Error-proofing here
             int startIdx = BinarySearchByTimestamp(data, endtime, true);
             int endIdx = BinarySearchByTimestamp(data, starttime, false);
+            // Error - proofing here
+            startIdx = (startIdx == -1) ? 0 : startIdx;
+            endIdx = (endIdx == -1) ? data.Count -1 : endIdx;
+
             return data.GetRange(startIdx, (endIdx - startIdx));
         }
         public double CalculateAverageMoisture(List<SensorData> list)
@@ -79,7 +82,7 @@ namespace Soil_Sensor_Dashboard
                 array2D[i,1] = list[i].SensorID;
                 array2D[i,2] = list[i].Moisture;
             }
-            //System.Diagnostics.Debug.WriteLine(array2D.Length.ToString());
+
             return array2D;
         }
     }
