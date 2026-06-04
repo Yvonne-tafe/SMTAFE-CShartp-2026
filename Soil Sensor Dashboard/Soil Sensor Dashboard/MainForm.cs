@@ -169,8 +169,12 @@ namespace Soil_Sensor_Dashboard
                     currentFileIndex = 0;
 
                     UIinit();
+                    msg = $"File loaded!";
+                } else
+                {
+                    msg = $"File loaded Cancel!";
                 }
-                msg = $"File loaded!";
+                
                 return true;
             }
         }
@@ -221,11 +225,11 @@ namespace Soil_Sensor_Dashboard
             float value = Convert.ToSingle(row.Cells[columnName].Value);
             if (value < low)
             {
-                row.Cells[columnName].Style.BackColor = Color.LightCoral;   // low
+                row.Cells[columnName].Style.BackColor = Color.LightBlue;   // low
             }
             else if (value > high)
             {
-                row.Cells[columnName].Style.BackColor = Color.LightBlue;    // high
+                row.Cells[columnName].Style.BackColor = Color.LightCoral;    // high
             }
             else
             {
@@ -238,6 +242,10 @@ namespace Soil_Sensor_Dashboard
             messageService.ShowAction($"Re-loaded Default Data!");
         }
         private void Save_Click(object sender, EventArgs e)
+        {
+            SaveCurrentDisplayData();
+        }
+        private void SaveCurrentDisplayData()
         {
             SaveToBinFile(currentDisplayData);
         }
