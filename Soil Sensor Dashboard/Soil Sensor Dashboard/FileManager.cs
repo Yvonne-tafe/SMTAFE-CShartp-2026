@@ -7,8 +7,20 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Soil_Sensor_Dashboard
 {
+    /// <summary>
+    /// Handles file input and output operations for the sensor data application.
+    /// This includes loading CSV files, loading saved binary files,
+    /// and saving sensor data into a binary file.
+    /// </summary>
     internal class FileManager
     {
+        /// <summary>
+        /// Loads sensor data from a CSV file and adds it to the loaded file collection.
+        /// </summary>
+        /// /// <param name="filePath">The path of the CSV file to load.</param>
+        /// <param name="loadedFiles">The list used to store loaded sensor data files.</param>
+        /// <param name="msg">Returns a success or error message.</param>
+        /// <returns>True if the file is loaded successfully; otherwise, false.</returns>
         public bool LoadFile(string filePath, List<DataFile> loadedFiles, out string msg)
         {
             try
@@ -56,6 +68,14 @@ namespace Soil_Sensor_Dashboard
             }
 
         }
+        /// <summary>
+        /// Loads previously saved sensor data from a binary file.
+        /// The binary file stores JSON text encoded as UTF-8 bytes.
+        /// </summary>
+        /// <param name="filePath">The path of the binary file to load.</param>
+        /// <param name="loadedFiles">The list used to store loaded sensor data files.</param>
+        /// <param name="msg">Returns a success or error message.</param>
+        /// <returns>True if the binary file is loaded successfully; otherwise, false.</returns>
         public bool LoadBinFile(string filePath, List<DataFile> loadedFiles, out string msg)
         {
             try
@@ -81,6 +101,14 @@ namespace Soil_Sensor_Dashboard
                 return false;
             }
         }
+        /// <summary>
+        /// Saves the current sensor data into a binary file.
+        /// The sensor data is first serialised to JSON and then written as UTF-8 bytes.
+        /// </summary>
+        /// <param name="filePath">The path where the binary file will be saved.</param>
+        /// <param name="data">The sensor data list to save.</param>
+        /// <param name="msg">Returns a success or error message.</param>
+        /// <returns>True if the file is saved successfully; otherwise, false.</returns>
         public bool SaveBinaryFile(string filePath, List<SensorData> data, out string msg)
         {
             try

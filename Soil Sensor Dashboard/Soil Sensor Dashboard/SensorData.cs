@@ -5,6 +5,11 @@ using System.Xml.Linq;
 
 namespace Soil_Sensor_Dashboard
 {
+    /// <summary>
+    /// Represents a single sensor data record.
+    /// Each record contains a timestamp, sensor ID,
+    /// and moisture value collected from the sensor (File).
+    /// </summary>
     public class SensorData
     {
         public DateTime CreateTime { get; set; }

@@ -29,10 +29,13 @@ namespace Soil_Sensor_Dashboard
         public MainForm()
         {
             InitializeComponent();
-            // TODO:
             //sensorDataGridView.DataBindingComplete += sensorDataGridView_DataBindingComplete;
             initMainForm();
         }
+        /// <summary>
+        /// Initialises the main form, loads the default sensor data,
+        /// and prepares the UI for displaying data.
+        /// </summary>
         private void initMainForm()
         {
             loadedFiles = new List<DataFile>();
@@ -185,6 +188,11 @@ namespace Soil_Sensor_Dashboard
             ApplyCellColors();
             sensorDataGridView.ClearSelection();
         }
+        /// <summary>
+        /// Displays the current sensor data in the DataGridView.
+        /// The data is converted into a 2D array before being displayed,
+        /// as required by the project specification.
+        /// </summary>
         private void DisplayCurrentData()
         {
             object[,] gridData = dataProcessor.ConvertTo2DArray(currentDisplayData);
@@ -210,6 +218,11 @@ namespace Soil_Sensor_Dashboard
 
             ApplyCellColors();
         }
+        /// <summary>
+        /// Applies background colours to moisture cells based on the lower
+        /// and upper bound values.
+        /// Blue = below range, red = above range, green = acceptable range.
+        /// </summary>
         private void ApplyCellColors()
         {
             foreach (DataGridViewRow row in sensorDataGridView.Rows)
@@ -382,7 +395,7 @@ namespace Soil_Sensor_Dashboard
         {
             DateTime pickedStartTime = DTPStartTime.Value;
             DateTime pickedEndTime = DTPEndTime.Value;
-            currentDisplayData = dataProcessor.FileterByTimestampRange(originalData, pickedStartTime, pickedEndTime);
+            currentDisplayData = dataProcessor.FilterByTimestampRange(originalData, pickedStartTime, pickedEndTime);
 
         }
         private void ResetFilter()
@@ -401,6 +414,10 @@ namespace Soil_Sensor_Dashboard
         {
             Application.Exit();
         }
+        /// <summary>
+        /// Validates the lower and upper bound inputs entered by the user.
+        /// The values must be numeric and the lower bound must be less than the upper bound.
+        /// </summary>
         private bool BoundSetupValidation()
         {
             if (string.IsNullOrWhiteSpace(TBLowerBound.Text) || string.IsNullOrWhiteSpace(TBUpperBound.Text))

@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Soil_Sensor_Dashboard
 {
+    /// <summary>
+    /// Represents one loaded sensor data file in the application.
+    /// It stores the file information, sensor ID, original data,
+    /// and the current data displayed after filtering or processing.
+    /// </summary>
     internal class DataFile
     {
         public string FileName { get; set; }
