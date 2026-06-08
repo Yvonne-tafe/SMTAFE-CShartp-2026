@@ -1,13 +1,25 @@
-\# Soil Sensor Dashboard
+\# Sensing4U - Soil Sensor Data Management - Soil Sensor Dashboard
 
 
 
-This project is a dashboard system designed to monitor and visualize soil sensor data.
+Project Overview
+
+Soil Sensor Dashboard is a Windows Forms application developed in C# for monitoring and analysing soil moisture sensor data.
+
+The application allows users to:
+
+- Load sensor data from CSV or binary files.
+- Display sensor readings in a DataGridView.
+- Filter sensor data by a selected date range.
+- Apply upper and lower moisture thresholds.
+- Visualise sensor values using colour-coded indicators.
+- Calculate average moisture values.
+- Save filtered sensor data to a binary file.
 
 
 ## ⚡ Project Status: MVP (Minimum Viable Product)
 
-This project is currently in its **Minimum Viable Product (MVP)** stage. The core architecture and main features are functional, but active development is ongoing.
+This project is currently in its **Minimum Viable Product (MVP)** stage. The core architecture and main features are functional.
 
 ### 🛠️ Current Focus & Upcoming Improvements:
 - **Error Handling & Input Validation**: Robust exception handling is currently being implemented to prevent crashes from unexpected user inputs or corrupt data.
@@ -26,23 +38,15 @@ To ensure the application runs correctly, the required sensor data files (`.csv`
 \### Required File Structure
 
 
-
 Once the project is successfully built, copy and paste the required `.csv` files into the following execution directory:
-
-
-
-`Soil Sensor Dashboard\\Soil Sensor Dashboard\\bin\\Debug\\net10.0-windows\\`
-
+	`Soil Sensor Dashboard\\Soil Sensor Dashboard\\bin\\Debug\\net10.0-windows\\`
 
 
 The directory \*\*must\*\* contain the following four CSV files along with the executable (`.exe`):
 
 1\. \*\*sensor1\_all.csv\*\* - Historical data for Sensor 1
-
 2\. \*\*sensor2\_all.csv\*\* - Historical data for Sensor 2
-
 3\. \*\*sensor3\_all.csv\*\* - Historical data for Sensor 3
-
 4\. \*\*SensorFiles.csv\*\* - Main sensor index/configuration file
 
 
@@ -51,20 +55,43 @@ The directory \*\*must\*\* contain the following four CSV files along with the e
 
 
 
-\## 🛠️ How to Run the Project
+\## 🛠️ How to Build
+
+
+1\. Open Soil Sensor Dashboard.sln in Visual Studio.
+2\. Restore NuGet packages if required.
+3\. Select Build Solution.
+4\. Verify that the project builds successfully.
 
 
 
-1\. \*\*Clone\*\* this repository to your local machine.
+\## 🛠️ How to Run
+1\. Build the project.
+2\. Copy the required CSV files into:
+	bin\Debug\net10.0-windows\
+3\. Start the application using:
+	Visual Studio (F5), or
+	the generated executable file.
+4\. The application will automatically load the default sensor dataset.
 
-2\. Open `Soil Sensor Dashboard.slnx` using Visual Studio.
-
-3\. \*\*Build the project\*\* (or press F5 to Run) to generate the output folders.
-
-4\. Copy the four required `.csv` files into the newly created `bin\\Debug\\net10.0-windows` folder.
-
-5\. Launch the application from Visual Studio or directly double-click the `.exe` file.
 
 
+\## 🛠️ Maintenance Notes
+
+Future developers should follow the existing separation of responsibilities:
+
+- UI changes should be implemented in MainForm.
+- Data processing logic should be added to DataProcessor.
+- File operations should remain in FileManager.
+- User notifications should remain in MessageService.
+
+When adding new sensor attributes, update:
+
+- SensorData
+- ConvertTo2DArray()
+- DisplayCurrentData()
+- Grid colour visualisation logic
+
+to ensure the new fields are displayed correctly.
 
 
