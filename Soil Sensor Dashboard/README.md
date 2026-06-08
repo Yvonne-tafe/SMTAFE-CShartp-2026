@@ -27,16 +27,44 @@ This project is currently in its **Minimum Viable Product (MVP)** stage. The cor
 
 
 
+
+## Submitted Project Structure
+
+The zipped source code submission should include the following files and folders:
+
+```text
+Soil Sensor Dashboard.slnx
+
+Soil Sensor Dashboard/
+│
+├── Properties/
+├── DataFile.cs
+├── DataProcessor.cs
+├── FileManager.cs
+├── MainForm.cs
+├── MainForm.Designer.cs
+├── MainForm.resx
+├── MessageService.cs
+├── Program.cs
+├── SensorData.cs
+├── Soil Sensor Dashboard.csproj
+│
+├── sensor1_all.csv
+├── sensor2_all.csv
+├── sensor3_all.csv
+└── SensorFiles.csv
+
+
+
+
 \## 📌 Prerequisites \& File Setup
-
-
 
 To ensure the application runs correctly, the required sensor data files (`.csv`) must be placed inside the build output directory after the system is compiled/built.
 
 
 
-\### Required File Structure
 
+\### Required File 
 
 Once the project is successfully built, copy and paste the required `.csv` files into the following execution directory:
 	`Soil Sensor Dashboard\\Soil Sensor Dashboard\\bin\\Debug\\net10.0-windows\\`
