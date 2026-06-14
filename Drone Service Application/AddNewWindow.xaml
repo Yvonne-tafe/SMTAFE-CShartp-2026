@@ -38,12 +38,13 @@
                 <TextBox Grid.Row="2" Grid.Column="1" Height="60"  AcceptsReturn="True" Margin="5" x:Name="txtServiceProblem"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Service Cost:" Margin="5"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Margin="5" x:Name="txtServiceCost"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="270,6,-270,4" Text="Express +15% Surcharge" />
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Service Tag:" Margin="5"/>
                 <!--
                 6.5 Use a numeric control for the Service Tag
                 NuGet install Extended.Wpf.Toolkit first
                 -->
-                <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Margin="5" x:Name="numServiceTag" Minimum="100" Maximum="900" Increment="10" Value="100" IsEnabled="False"/>
+                <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Margin="5" x:Name="numServiceTag" Minimum="100" Maximum="900" Increment="10" IsEnabled="False"/>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Priority:" Margin="5"/>
                 <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
                     <RadioButton x:Name="rdoRegular" Content="Regular"  GroupName="ServicePriority" IsChecked="True" Margin="0,0,15,0"/>

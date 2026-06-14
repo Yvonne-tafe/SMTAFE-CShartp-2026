@@ -23,6 +23,10 @@ namespace Drone_Service_Application
         private Queue<Drone> RegularService = new Queue<Drone>();
         //6.4 Global Queue<T> to store express service items
         private Queue<Drone> ExpressService = new Queue<Drone>();
+
+        // for next service tag
+        private int nextServiceTag = 100;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,8 +36,11 @@ namespace Drone_Service_Application
         //Click to Add new drone item
         private void Button_Click_AddNewDrone(object sender, RoutedEventArgs e)
         {
-            AddNewWindow addWindow = new AddNewWindow();
+            AddNewWindow addWindow = new AddNewWindow(RegularService, ExpressService, nextServiceTag);
             addWindow.ShowDialog();
+
+            nextServiceTag = addWindow.NextServiceTag;
+            CommonControls.SetStatus("Normal");
         }
 
         //6.12	Create a mouse click method for the regular service ListView that will display the Client Name and Service Problem in the related textboxes.

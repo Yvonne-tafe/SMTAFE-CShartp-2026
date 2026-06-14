@@ -24,7 +24,7 @@ namespace Drone_Service_Application
         }
         public void SetStatus(string message)
         {
-            txtStatus.Text = message;
+            txtStatus.Text = "Status: " +message;
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

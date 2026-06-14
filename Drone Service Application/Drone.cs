@@ -10,7 +10,7 @@ namespace Drone_Service_Application
     /// Use separate getter and setter methods, ensure the attributes are private and the accessor methods are public. 
     /// Save the class as “Drone.cs”
     /// </summary>
-    class Drone
+    public class Drone
     {
         private string clientName;
         private string droneModel;
@@ -30,6 +30,7 @@ namespace Drone_Service_Application
         public void SetDroneModel(string value) { droneModel = value; }
 
         public string GetServiceProblem() { return serviceProblem; }
+
         //6.1 Add suitable code to Service Problem accessor methods so the data is formatted as Sentence case
         public void SetServiceProblem(string value)
         {

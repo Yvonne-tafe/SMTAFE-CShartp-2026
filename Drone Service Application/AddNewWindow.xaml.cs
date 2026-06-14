@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
+
 namespace Drone_Service_Application
 {
     /// <summary>
@@ -22,9 +24,19 @@ namespace Drone_Service_Application
     /// </summary>
     public partial class AddNewWindow : Window
     {
-        public AddNewWindow()
+        private Queue<Drone> RegularService;
+        private Queue<Drone> ExpressService;
+        public int NextServiceTag;
+        public AddNewWindow(Queue<Drone> regularService, Queue<Drone> expressService, int nextServiceTag)
         {
             InitializeComponent();
+
+            RegularService = regularService;
+            ExpressService = expressService;
+            NextServiceTag = nextServiceTag;
+
+            // auto create ServiceTag
+            numServiceTag.Value = nextServiceTag;
         }
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
@@ -34,39 +46,67 @@ namespace Drone_Service_Application
         //6.5 Create a button method called “AddNewItem” that will add a new service item to a Queue<> based on the priority.
         private void AddNewItem()
         {
-            //to do
-            //6.5 The new service item will be added to the appropriate Queue based on the Priority radio button.
-            //6.6 Before a new service item is added to the Express Queue the service cost must be increased by 15%.
+            Drone newDrone = new Drone();
+            newDrone.SetClientName(txtClientName.Text);
+            newDrone.SetDroneModel(txtDroneModel.Text);
+            newDrone.SetServiceProblem(txtServiceProblem.Text);
 
             //6.7 GetServicePriority() must be called inside the “AddNewItem” method before the new service item is added to a queue.
-            GetServicePriority();
+            string priority = GetServicePriority();
+            double serviceCost;
+            string resultMsg;
+            if (!ValidateServiceCost(out serviceCost, out resultMsg))
+            {
+                CommonControls.SetStatus(resultMsg);
+                return;
+            }
 
+            if (!numServiceTag.Value.HasValue) //error control - empty
+            {
+                CommonControls.SetStatus("Service Tag error. Please return to the Main Menu and try again.");
+                return;
+            }
+            int currentServiceTag = numServiceTag.Value.Value;
+            newDrone.SetServiceTag(currentServiceTag);
             //6.11	IncrementServiceTag() must be called inside the “AddNewItem” method before the new service item is added to a queue.
-            //todo error control
-            int tag = numServiceTag.Value ?? 100; 
-            IncrementServiceTag(tag);
-            return;
+            IncrementServiceTag(currentServiceTag);
+
+            //6.5 The new service item will be added to the appropriate Queue based on the Priority radio button.
+            if (priority == "Regular")
+            {
+                newDrone.SetServiceCost(serviceCost);
+                RegularService.Enqueue(newDrone);
+            } else
+            {
+                //6.6 Before a new service item is added to the Express Queue the service cost must be increased by 15 %.
+                newDrone.SetServiceCost(serviceCost * 0.15);
+                ExpressService.Enqueue(newDrone);
+            }
+            CommonControls.SetStatus($"New service added to {priority} queue.");
+            //6.17	clear all the textboxes after each service item has been added.
+            CleanAddForm();
+
         }
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
         private string GetServicePriority()
         {
             if (rdoRegular.IsChecked == true)
-            {
                 return "Regular";
-            }
-            else
-            {
-                return "Express";
-            }
+
+            return "Express";
         }
         //6.10	Create a custom method to ensure the Service Cost textbox can only accept a double value with two decimal point.
-        private bool ValidateServiceCost()
+        private bool ValidateServiceCost(out double serviceCost, out string resultMsg)
         {
-            double serviceCost;
-
+            serviceCost = 0;
+            if (string.IsNullOrWhiteSpace(txtServiceCost.Text))
+            {
+                resultMsg = "Service Cost is required.";
+                return false;
+            }
             if (!double.TryParse(txtServiceCost.Text, out serviceCost))
             {
-                CommonControls.SetStatus("Service Cost must be a number.");
+                resultMsg="Service Cost must be a number.";
                 return false;
             }
 
@@ -74,27 +114,31 @@ namespace Drone_Service_Application
 
             if (parts.Length == 2 && parts[1].Length > 2)
             {
-                CommonControls.SetStatus("Service Cost can only have two decimal places.");
+                resultMsg = "Service Cost can only have two decimal places.";
                 return false;
             }
-
+            serviceCost = double.Parse(txtServiceCost.Text);
+            resultMsg = "Service Cost validation successful.";
             return true;
         }
 
         //6.11	Create a custom method to increment the service tag control,
         //this method must be called inside the “AddNewItem” method before the new service item is added to a queue.
-        private void IncrementServiceTag(int NewTag)
+        private void IncrementServiceTag(int currentTag)
         {
-            //to do
-            //get new Tag
-            //set next tag
+            NextServiceTag = currentTag + 10;
             return;
         }
 
         //6.17	Create a custom method that will clear all the textboxes after each service item has been added.
         private void CleanAddForm()
         {
-
+            txtClientName.Clear();
+            txtDroneModel.Clear();
+            txtServiceProblem.Clear();
+            txtServiceCost.Clear();
+            numServiceTag.Value = NextServiceTag;
         }
+
     }
 }
