@@ -121,7 +121,7 @@ namespace Drone_Service_Application
         {
             if (queue.Count > 0)
             {
-                resultMsg = "Service item moved to Finished List.";
+                resultMsg = "Service Queue is not empty.";
                 return false;
             }
             else
