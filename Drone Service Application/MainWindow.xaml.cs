@@ -98,7 +98,7 @@ namespace Drone_Service_Application
         //Click to call the page to show final list
         private void Button_Click_ShowFinalList(object sender, RoutedEventArgs e)
         {
-            DisplayFinalListWindow addWindow = new DisplayFinalListWindow();
+            DisplayFinalListWindow addWindow = new DisplayFinalListWindow(FinishedList);
             addWindow.ShowDialog();
         }
                 

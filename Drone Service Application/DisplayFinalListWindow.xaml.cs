@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit.Primitives;
 
 namespace Drone_Service_Application
 {
@@ -20,16 +21,79 @@ namespace Drone_Service_Application
     /// </summary>
     public partial class DisplayFinalListWindow : Window
     {
-        public DisplayFinalListWindow()
+        private List<Drone> FinishedList;
+        public DisplayFinalListWindow(List<Drone> finishedList)
         {
             InitializeComponent();
+
+            FinishedList = finishedList;
+            DisplayFinalService();
+        }
+
+        //to display finished service list inside ListBox
+        private void DisplayFinalService()
+        {
+            string resultMsg;
+            if (isListEmpty(FinishedList, out resultMsg))
+            {
+                CommonControls.SetStatus($"{resultMsg}");
+                return;
+            }
+
+            foreach (Drone drone in FinishedList)
+            {
+                ListBoxItem item = new ListBoxItem();
+                item.Content = drone.Display();
+                item.MouseDoubleClick += ListBoxItem_MouseDoubleClick;
+                item.Tag = drone;
+
+                lstFinishedServices.Items.Add(item);
+            }
         }
 
         //6.16	Create a double mouse click method that will delete a service item from the finished listbox and remove the same item from the List<T>.
         private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //todo
+            if (sender is not ListBoxItem selectedItem)
+            {
+                CommonControls.SetStatus("Fail to select service from Finished Service List.");
+                return;
+            }
+
+            Drone droneData = (Drone) selectedItem.Tag;
+            string resultMsg;
+
+            //Remove from List
+            if (isListEmpty(FinishedList, out resultMsg))
+            {
+                //empty FinishedList
+                CommonControls.SetStatus($"{resultMsg}");
+                return;
+            }
+            if (!FinishedList.Remove(droneData))
+            {
+                //remove Fail
+                CommonControls.SetStatus($"Fail to remove service from Finished Service List.");
+                return;
+            }
+
+            //Remove from ListBox
+            lstFinishedServices.Items.Remove(selectedItem);
+            CommonControls.SetStatus($"Service '{droneData.Display()}' removed from Finished Service List.");
             return;
+        }
+        private bool isListEmpty(List<Drone> list, out string resultMsg)
+        {
+            if (list.Count > 0)
+            {
+                resultMsg = "Finished service list is not emptyt.";
+                return false;
+            }
+            else
+            {
+                resultMsg = "Finished service list is emptyt.";
+                return true;
+            }
         }
     }
 }
