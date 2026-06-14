@@ -34,7 +34,7 @@ namespace Drone_Service_Application
         private void DisplayFinalService()
         {
             string resultMsg;
-            if (isListEmpty(FinishedList, out resultMsg))
+            if (IsListEmpty(FinishedList, out resultMsg))
             {
                 CommonControls.SetStatus($"{resultMsg}");
                 return;
@@ -59,12 +59,15 @@ namespace Drone_Service_Application
                 CommonControls.SetStatus("Fail to select service from Finished Service List.");
                 return;
             }
-
-            Drone droneData = (Drone) selectedItem.Tag;
+            if (selectedItem.Tag is not Drone droneData)
+            {
+                CommonControls.SetStatus("Invalid service item selected.");
+                return;
+            }
             string resultMsg;
 
             //Remove from List
-            if (isListEmpty(FinishedList, out resultMsg))
+            if (IsListEmpty(FinishedList, out resultMsg))
             {
                 //empty FinishedList
                 CommonControls.SetStatus($"{resultMsg}");
@@ -82,16 +85,16 @@ namespace Drone_Service_Application
             CommonControls.SetStatus($"Service '{droneData.Display()}' removed from Finished Service List.");
             return;
         }
-        private bool isListEmpty(List<Drone> list, out string resultMsg)
+        private bool IsListEmpty(List<Drone> list, out string resultMsg)
         {
             if (list.Count > 0)
             {
-                resultMsg = "Finished service list is not emptyt.";
+                resultMsg = "Finished service list is not empty.";
                 return false;
             }
             else
             {
-                resultMsg = "Finished service list is emptyt.";
+                resultMsg = "Finished service list is empty.";
                 return true;
             }
         }

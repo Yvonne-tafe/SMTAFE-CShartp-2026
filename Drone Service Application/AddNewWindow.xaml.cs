@@ -76,7 +76,8 @@ namespace Drone_Service_Application
             {
                 newDrone.SetServiceCost(serviceCost);
                 RegularService.Enqueue(newDrone);
-            } else
+            } 
+            else
             {
                 //6.6 Before a new service item is added to the Express Queue the service cost must be increased by 15 %.
                 newDrone.SetServiceCost(serviceCost * 1.15);
@@ -84,7 +85,7 @@ namespace Drone_Service_Application
             }
             CommonControls.SetStatus($"New service added to {priority} queue.");
             //6.17	clear all the textboxes after each service item has been added.
-            CleanAddForm();
+            ClearAddForm();
 
         }
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
@@ -117,7 +118,7 @@ namespace Drone_Service_Application
                 resultMsg = "Service Cost can only have two decimal places.";
                 return false;
             }
-            serviceCost = double.Parse(txtServiceCost.Text);
+
             resultMsg = "Service Cost validation successful.";
             return true;
         }
@@ -127,11 +128,10 @@ namespace Drone_Service_Application
         private void IncrementServiceTag(int currentTag)
         {
             NextServiceTag = currentTag + 10;
-            return;
         }
 
         //6.17	Create a custom method that will clear all the textboxes after each service item has been added.
-        private void CleanAddForm()
+        private void ClearAddForm()
         {
             txtClientName.Clear();
             txtDroneModel.Clear();

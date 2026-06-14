@@ -43,7 +43,7 @@ namespace Drone_Service_Application
         private void Button_Click_CompleteRegular(object sender, RoutedEventArgs e)
         {
             string resultMsg;
-            if (isQueueEmpty(RegularService, out resultMsg))
+            if (IsQueueEmpty(RegularService, out resultMsg))
             {
                 CommonControls.SetStatus($"Regular {resultMsg}");
                 return;
@@ -52,7 +52,7 @@ namespace Drone_Service_Application
             FinishedList.Add(finishedDrone);
             CommonControls.SetStatus($"Moved the completed regular service '{finishedDrone.Display()}' to Final List.");
 
-            FreshRegularService();
+            RefreshRegularService();
         }
 
         //6.15	Create a button click method that will remove a service item from the express ListView and dequeue the express service Queue<T> data structure.
@@ -60,7 +60,7 @@ namespace Drone_Service_Application
         private void Button_Click_CompleteExpress(object sender, RoutedEventArgs e)
         {
             string resultMsg;
-            if (isQueueEmpty(ExpressService, out resultMsg))
+            if (IsQueueEmpty(ExpressService, out resultMsg))
             {
                 CommonControls.SetStatus($"Express {resultMsg}");
                 return;
@@ -69,7 +69,7 @@ namespace Drone_Service_Application
             FinishedList.Add(finishedDrone);
             CommonControls.SetStatus($"Moved the completed express service '{finishedDrone.Display()}' to Final List.");
 
-            FreshExpressService();
+            RefreshExpressService();
         }
 
         //6.8 Create a custom method that will display all the elements in the RegularService queue.
@@ -104,20 +104,19 @@ namespace Drone_Service_Application
                     ServiceTag = drone.GetServiceTag()
                 });
             }
-            return;
         }
 
-        private void FreshRegularService()
+        private void RefreshRegularService()
         {
             lvRegularService.Items.Clear();
             DisplayRegularService();
         }
-        private void FreshExpressService()
+        private void RefreshExpressService()
         {
             lvExpressService.Items.Clear();
             DisplayExpressService();
         }
-        private bool isQueueEmpty(Queue<Drone> queue, out string resultMsg)
+        private bool IsQueueEmpty(Queue<Drone> queue, out string resultMsg)
         {
             if (queue.Count > 0)
             {

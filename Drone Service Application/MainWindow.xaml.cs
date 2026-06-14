@@ -18,11 +18,11 @@ namespace Drone_Service_Application
     public partial class MainWindow : Window
     {
         //6.2 Global List<T> to store finished service items
-        private List<Drone> FinishedList = new List<Drone>();
+        private readonly List<Drone> _finishedList = new List<Drone>();
         //6.3 Global Queue<T> to store regular service items
-        private Queue<Drone> RegularService = new Queue<Drone>();
+        private readonly Queue<Drone> _regularService = new Queue<Drone>();
         //6.4 Global Queue<T> to store express service items
-        private Queue<Drone> ExpressService = new Queue<Drone>();
+        private readonly Queue<Drone> _expressService = new Queue<Drone>();
 
         // for next service tag
         private int nextServiceTag = 100;
@@ -33,54 +33,11 @@ namespace Drone_Service_Application
             CommonControls.ShowExitButton(false);
             TestData();
         }
-        private void TestData()
-        {
-            Drone newDrone = new Drone();
-            newDrone.SetClientName("Test1");
-            newDrone.SetDroneModel("TestModel1");
-            newDrone.SetServiceCost(100);
-            newDrone.SetServiceProblem("Test Problem 1");
-            newDrone.SetServiceTag(100);
-            RegularService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test2");
-            newDrone.SetDroneModel("TestModel2");
-            newDrone.SetServiceCost(150);
-            newDrone.SetServiceProblem("Test Problem 2");
-            newDrone.SetServiceTag(110);
-            RegularService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test3");
-            newDrone.SetDroneModel("TestModel3");
-            newDrone.SetServiceCost(170);
-            newDrone.SetServiceProblem("Test Problem 3");
-            newDrone.SetServiceTag(120);
-            RegularService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test4");
-            newDrone.SetDroneModel("TestModel4");
-            newDrone.SetServiceCost(115);
-            newDrone.SetServiceProblem("Test Problem 4");
-            newDrone.SetServiceTag(130);
-            ExpressService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test5");
-            newDrone.SetDroneModel("TestModel5");
-            newDrone.SetServiceCost(175);
-            newDrone.SetServiceProblem("Test Problem 5");
-            newDrone.SetServiceTag(140);
-            ExpressService.Enqueue(newDrone);
-            nextServiceTag = 150;
-        }
-
+        
         //Click to Add new drone item
         private void Button_Click_AddNewDrone(object sender, RoutedEventArgs e)
         {
-            AddNewWindow addWindow = new AddNewWindow(RegularService, ExpressService, nextServiceTag);
+            AddNewWindow addWindow = new AddNewWindow(_regularService, _expressService, nextServiceTag);
             addWindow.ShowDialog();
 
             nextServiceTag = addWindow.NextServiceTag;
@@ -91,21 +48,66 @@ namespace Drone_Service_Application
         //6.13	Create a mouse click method for the express service ListView that will display the Client Name and Service Problem in the related textboxes.
         private void Button_Click_ShowQueues(object sender, RoutedEventArgs e)
         {
-            DisplayQueueWindow addWindow = new DisplayQueueWindow(RegularService, ExpressService, FinishedList);
-            addWindow.ShowDialog();
+            DisplayQueueWindow queueWindow = new DisplayQueueWindow(_regularService, _expressService, _finishedList);
+            queueWindow.ShowDialog();
         }
 
         //Click to call the page to show final list
         private void Button_Click_ShowFinalList(object sender, RoutedEventArgs e)
         {
-            DisplayFinalListWindow addWindow = new DisplayFinalListWindow(FinishedList);
-            addWindow.ShowDialog();
+            DisplayFinalListWindow finalListWindow = new DisplayFinalListWindow(_finishedList);
+            finalListWindow.ShowDialog();
         }
                 
         //Click to exit the app
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        // TestData is used for debugging only. Disable before final submission.
+        private void TestData()
+        {
+            Drone newDrone = new Drone();
+            newDrone.SetClientName("Test1");
+            newDrone.SetDroneModel("TestModel1");
+            newDrone.SetServiceCost(100);
+            newDrone.SetServiceProblem("Test Problem 1");
+            newDrone.SetServiceTag(100);
+            _regularService.Enqueue(newDrone);
+
+            newDrone = new Drone();
+            newDrone.SetClientName("Test2");
+            newDrone.SetDroneModel("TestModel2");
+            newDrone.SetServiceCost(150);
+            newDrone.SetServiceProblem("Test Problem 2");
+            newDrone.SetServiceTag(110);
+            _regularService.Enqueue(newDrone);
+
+            newDrone = new Drone();
+            newDrone.SetClientName("Test3");
+            newDrone.SetDroneModel("TestModel3");
+            newDrone.SetServiceCost(170);
+            newDrone.SetServiceProblem("Test Problem 3");
+            newDrone.SetServiceTag(120);
+            _regularService.Enqueue(newDrone);
+
+            newDrone = new Drone();
+            newDrone.SetClientName("Test4");
+            newDrone.SetDroneModel("TestModel4");
+            newDrone.SetServiceCost(115);
+            newDrone.SetServiceProblem("Test Problem 4");
+            newDrone.SetServiceTag(130);
+            _expressService.Enqueue(newDrone);
+
+            newDrone = new Drone();
+            newDrone.SetClientName("Test5");
+            newDrone.SetDroneModel("TestModel5");
+            newDrone.SetServiceCost(175);
+            newDrone.SetServiceProblem("Test Problem 5");
+            newDrone.SetServiceTag(140);
+            _expressService.Enqueue(newDrone);
+            nextServiceTag = 150;
         }
     }
 }
