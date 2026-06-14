@@ -79,7 +79,7 @@ namespace Drone_Service_Application
             } else
             {
                 //6.6 Before a new service item is added to the Express Queue the service cost must be increased by 15 %.
-                newDrone.SetServiceCost(serviceCost * 0.15);
+                newDrone.SetServiceCost(serviceCost * 1.15);
                 ExpressService.Enqueue(newDrone);
             }
             CommonControls.SetStatus($"New service added to {priority} queue.");
