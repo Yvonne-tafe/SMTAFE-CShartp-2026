@@ -10,7 +10,10 @@
         <local:CommonControls x:Name="CommonControls"/>
         <GroupBox Header="Finished Services" Margin="5,50,5,5">
             <StackPanel>
-                <ListBox x:Name="lstFinishedServices"
+                <!--
+                Feature: The finished service items must be displayed in a ListBox which displays the Client Name and Service Cost.
+                -->
+                    <ListBox x:Name="lstFinishedServices"
                  Height="209"
                  Margin="5" RenderTransformOrigin="0.5,0.5">
                 </ListBox>

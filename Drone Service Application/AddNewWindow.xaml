@@ -43,10 +43,15 @@
                 <!--
                 6.5 Use a numeric control for the Service Tag
                 NuGet install Extended.Wpf.Toolkit first
+                Feature: The input for the Service Tag must be a numeric control. The minimum value is 100, maximum is 900 with increments of 10. 
                 -->
                 <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Margin="5" x:Name="numServiceTag" Minimum="100" Maximum="900" Increment="10" IsEnabled="False"/>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Priority:" Margin="5"/>
                 <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                    <!--
+                    The input for the Service Priority must be two radio buttons inside the same GroupName. 
+                    The two values are Regular and Express. This data is not part of the Drone class.
+                    -->
                     <RadioButton x:Name="rdoRegular" Content="Regular"  GroupName="ServicePriority" IsChecked="True" Margin="0,0,15,0"/>
                     <RadioButton x:Name="rdoExpress" Content="Express"  GroupName="ServicePriority"/>
                 </StackPanel>
