@@ -7,18 +7,14 @@
         mc:Ignorable="d"
         Title="Display Queues" Height="600" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="7"/>
-            <ColumnDefinition Width="Auto" MinWidth="789"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+        
         <local:CommonControls x:Name="CommonControls" Grid.ColumnSpan="2" Margin="0,0,10,0"/>
-        <GroupBox Header="Regular Service Queue" Margin="1,50,0,137" Grid.Column="1">
+        <GroupBox Header="Regular Service Queue" Margin="5,50,5,300">
             <StackPanel>
                 <!--
                 Feature: The service items must be displayed in a ListView which displays all the class attributes.
                 -->
-                    <ListView x:Name="lvRegularService" Height="120" Margin="5">
+                    <ListView x:Name="lvRegularService" Height="120" Margin="10">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Client Name" Width="120" DisplayMemberBinding="{Binding ClientName}"/>
@@ -33,13 +29,13 @@
                 <Button Content="Complete Regular Service"
                 Width="170"
                 Height="30"
-                Margin="5"
+                Margin="10"
                 HorizontalAlignment="Right" Click="Button_Click_CompleteRegular"/>
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Express Service Queue" Margin="1,249,4,111" Grid.Column="1">
-            <StackPanel Height="178">
+        <GroupBox Header="Express Service Queue" Margin="1,270,5,100" Grid.Column="1">
+            <StackPanel Height="200">
                 <!--
                 Feature: The service items must be displayed in a ListView which displays all the class attributes.
                 -->
