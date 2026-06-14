@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Drone_Service_Application
 {
@@ -21,37 +22,114 @@ namespace Drone_Service_Application
     /// </summary>
     public partial class DisplayQueueWindow : Window
     {
-        public DisplayQueueWindow()
+
+        private List<Drone> FinishedList;
+        private Queue<Drone> RegularService;
+        private Queue<Drone> ExpressService;
+        public DisplayQueueWindow(Queue<Drone> regularService, Queue<Drone> expressService, List<Drone> finishedList)
         {
             InitializeComponent();
+
+            RegularService = regularService;
+            ExpressService = expressService;
+            FinishedList = finishedList;
+
+            DisplayRegularService();
+            DisplayExpressService();
         }
 
         //6.14	Create a button click method that will remove a service item from the regular ListView and dequeue the regular service Queue<T> data structure.
         //The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
         private void Button_Click_CompleteRegular(object sender, RoutedEventArgs e)
         {
+            string resultMsg;
+            if (isQueueEmpty(RegularService, out resultMsg))
+            {
+                CommonControls.SetStatus($"Regular {resultMsg}");
+                return;
+            }
+            Drone finishedDrone = RegularService.Dequeue();
+            FinishedList.Add(finishedDrone);
+            CommonControls.SetStatus($"Moved the completed regular service '{finishedDrone.Display()}' to Final List.");
 
+            FreshRegularService();
         }
 
         //6.15	Create a button click method that will remove a service item from the express ListView and dequeue the express service Queue<T> data structure.
         //The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
         private void Button_Click_CompleteExpress(object sender, RoutedEventArgs e)
         {
+            string resultMsg;
+            if (isQueueEmpty(ExpressService, out resultMsg))
+            {
+                CommonControls.SetStatus($"Express {resultMsg}");
+                return;
+            }
+            Drone finishedDrone = ExpressService.Dequeue();
+            FinishedList.Add(finishedDrone);
+            CommonControls.SetStatus($"Moved the completed express service '{finishedDrone.Display()}' to Final List.");
 
+            FreshExpressService();
         }
 
         //6.8 Create a custom method that will display all the elements in the RegularService queue.
         //The display must use a List View and with appropriate column headers.
         private void DisplayRegularService()
         {
-            return;
+            foreach (Drone drone in RegularService)
+            {
+                lvRegularService.Items.Add(new
+                {
+                    ClientName = drone.GetClientName(),
+                    DroneModel = drone.GetDroneModel(),
+                    ServiceProblem = drone.GetServiceProblem(),
+                    ServiceCost = drone.GetServiceCost().ToString("F2"),
+                    ServiceTag = drone.GetServiceTag()
+                });
+            }
         }
-
+        
         //6.9	Create a custom method that will display all the elements in the ExpressService queue.
         //The display must use a List View and with appropriate column headers.
         private void DisplayExpressService()
         {
+            foreach (Drone drone in ExpressService)
+            {
+                lvExpressService.Items.Add(new
+                {
+                    ClientName = drone.GetClientName(),
+                    DroneModel = drone.GetDroneModel(),
+                    ServiceProblem = drone.GetServiceProblem(),
+                    ServiceCost = drone.GetServiceCost().ToString("F2"),
+                    ServiceTag = drone.GetServiceTag()
+                });
+            }
             return;
         }
+
+        private void FreshRegularService()
+        {
+            lvRegularService.Items.Clear();
+            DisplayRegularService();
+        }
+        private void FreshExpressService()
+        {
+            lvExpressService.Items.Clear();
+            DisplayExpressService();
+        }
+        private bool isQueueEmpty(Queue<Drone> queue, out string resultMsg)
+        {
+            if (queue.Count > 0)
+            {
+                resultMsg = "Service item moved to Finished List.";
+                return false;
+            }
+            else
+            {
+                resultMsg = "Service Queue is empty.";
+                return true;
+            }
+        }
+
     }
 }

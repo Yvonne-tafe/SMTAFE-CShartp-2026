@@ -12,17 +12,17 @@
             <ColumnDefinition Width="Auto" MinWidth="789"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <local:CommonControls x:Name="CommonControls" Grid.ColumnSpan="2" Margin="0,0,33,0"/>
+        <local:CommonControls x:Name="CommonControls" Grid.ColumnSpan="2" Margin="0,0,10,0"/>
         <GroupBox Header="Regular Service Queue" Margin="1,50,0,137" Grid.Column="1">
             <StackPanel>
                 <ListView x:Name="lvRegularService" Height="120" Margin="5">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Client Name" Width="120"/>
-                            <GridViewColumn Header="Drone Model" Width="120"/>
-                            <GridViewColumn Header="Service Problem" Width="180"/>
-                            <GridViewColumn Header="Service Cost" Width="90"/>
-                            <GridViewColumn Header="Service Tag" Width="80"/>
+                            <GridViewColumn Header="Client Name" Width="120" DisplayMemberBinding="{Binding ClientName}"/>
+                            <GridViewColumn Header="Drone Model" Width="120" DisplayMemberBinding="{Binding DroneModel}"/>
+                            <GridViewColumn Header="Service Problem" Width="180" DisplayMemberBinding="{Binding ServiceProblem}"/>
+                            <GridViewColumn Header="Service Cost" Width="90"  DisplayMemberBinding="{Binding ServiceCost}"/>
+                            <GridViewColumn Header="Service Tag" Width="80" DisplayMemberBinding="{Binding ServiceTag}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -40,11 +40,11 @@
                 <ListView x:Name="lvExpressService" Height="120" Margin="5">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Client Name" Width="120"/>
-                            <GridViewColumn Header="Drone Model" Width="120"/>
-                            <GridViewColumn Header="Service Problem" Width="180"/>
-                            <GridViewColumn Header="Service Cost" Width="90"/>
-                            <GridViewColumn Header="Service Tag" Width="80"/>
+                            <GridViewColumn Header="Client Name" Width="120" DisplayMemberBinding="{Binding ClientName}"/>
+                            <GridViewColumn Header="Drone Model" Width="120" DisplayMemberBinding="{Binding DroneModel}"/>
+                                <GridViewColumn Header="Service Problem" Width="180" DisplayMemberBinding="{Binding ServiceProblem}"/>
+                            <GridViewColumn Header="Service Cost" Width="90" DisplayMemberBinding="{Binding ServiceCost}"/>
+                            <GridViewColumn Header="Service Tag" Width="80" DisplayMemberBinding="{Binding ServiceTag}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
