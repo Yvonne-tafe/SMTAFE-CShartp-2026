@@ -47,6 +47,16 @@ namespace Drone_Service_Application
         private void AddNewItem()
         {
             Drone newDrone = new Drone();
+
+            // check if empty
+            if (string.IsNullOrWhiteSpace(txtClientName.Text) || 
+                string.IsNullOrWhiteSpace(txtDroneModel.Text) || 
+                string.IsNullOrWhiteSpace(txtServiceProblem.Text) ||
+                string.IsNullOrWhiteSpace(txtServiceCost.Text))
+            {
+                CommonControls.SetStatus("Input Error. Client Name, Drone Model, Service Problem or Service Cost should be filled.");
+                return;
+            }
             newDrone.SetClientName(txtClientName.Text);
             newDrone.SetDroneModel(txtDroneModel.Text);
             newDrone.SetServiceProblem(txtServiceProblem.Text);
@@ -61,12 +71,19 @@ namespace Drone_Service_Application
                 return;
             }
 
-            if (!numServiceTag.Value.HasValue) //error control - empty
+            //check if Service Tag error
+            if (!numServiceTag.Value.HasValue) 
             {
                 CommonControls.SetStatus("Service Tag error. Please return to the Main Menu and try again.");
                 return;
             }
             int currentServiceTag = numServiceTag.Value.Value;
+            if (currentServiceTag <100 || currentServiceTag > 900)
+            {
+                CommonControls.SetStatus("Service Tag error. Please return to the Main Menu and try again.");
+                return;
+            }
+            
             newDrone.SetServiceTag(currentServiceTag);
             //6.11	IncrementServiceTag() must be called inside the “AddNewItem” method before the new service item is added to a queue.
             IncrementServiceTag(currentServiceTag);
