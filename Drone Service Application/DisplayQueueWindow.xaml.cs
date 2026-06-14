@@ -28,14 +28,14 @@ namespace Drone_Service_Application
 
         //6.14	Create a button click method that will remove a service item from the regular ListView and dequeue the regular service Queue<T> data structure.
         //The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_CompleteRegular(object sender, RoutedEventArgs e)
         {
 
         }
 
         //6.15	Create a button click method that will remove a service item from the express ListView and dequeue the express service Queue<T> data structure.
         //The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_CompleteExpress(object sender, RoutedEventArgs e)
         {
 
         }

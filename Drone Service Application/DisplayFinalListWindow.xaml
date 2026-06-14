@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Drone_Service_Application"
         mc:Ignorable="d"
-        Title="Window2" Height="600" Width="800">
+        Title="Display Final List" Height="600" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="17" Width="285" Grid.ColumnSpan="2"><Run FontFamily="Calibri" FontSize="16" Language="en-au" Text="Icarus Drone Service Application" Foreground="Blue" FontWeight="Bold"/></TextBlock>
+        <local:CommonControls x:Name="CommonControls"/>
         <GroupBox Header="Finished Services" Margin="5,50,5,5">
             <StackPanel>
-
                 <ListBox x:Name="lstFinishedServices"
                  Height="209"
                  Margin="5" RenderTransformOrigin="0.5,0.5">
@@ -22,7 +21,7 @@
                             <TranslateTransform X="-1.085"/>
                         </TransformGroup>
                     </ListBox.RenderTransform>
-                    <ListBoxItem Content="John Smith - $150.00" Selected="ListBoxItem_Selected" MouseDoubleClick="ListBoxItem_MouseDoubleClick"/>
+                    <ListBoxItem Content="John Smith - $150.00" MouseDoubleClick="ListBoxItem_MouseDoubleClick"/>
                     <ListBoxItem Content="Mary Brown - $264.50"/>
                 </ListBox>
 
@@ -33,9 +32,5 @@
 
             </StackPanel>
         </GroupBox>
-        <StatusBar Margin="24,473,23,69" Grid.ColumnSpan="2">
-            <TextBlock x:Name="txtStatus" Text="Status:" Width="500"/>
-        </StatusBar>
-
     </Grid>
 </Window>

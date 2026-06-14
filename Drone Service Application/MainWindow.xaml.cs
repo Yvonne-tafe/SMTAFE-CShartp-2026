@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Drone_Service_Application
 {
@@ -25,9 +26,11 @@ namespace Drone_Service_Application
         public MainWindow()
         {
             InitializeComponent();
+            CommonControls.ShowExitButton(false);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //Click to Add new drone item
+        private void Button_Click_AddNewDrone(object sender, RoutedEventArgs e)
         {
             AddNewWindow addWindow = new AddNewWindow();
             addWindow.ShowDialog();
@@ -35,16 +38,23 @@ namespace Drone_Service_Application
 
         //6.12	Create a mouse click method for the regular service ListView that will display the Client Name and Service Problem in the related textboxes.
         //6.13	Create a mouse click method for the express service ListView that will display the Client Name and Service Problem in the related textboxes.
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_ShowQueues(object sender, RoutedEventArgs e)
         {
             DisplayQueueWindow addWindow = new DisplayQueueWindow();
             addWindow.ShowDialog();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        //Click to call the page to show final list
+        private void Button_Click_ShowFinalList(object sender, RoutedEventArgs e)
         {
             DisplayFinalListWindow addWindow = new DisplayFinalListWindow();
             addWindow.ShowDialog();
+        }
+                
+        //Click to exit the app
+        private void Button_Click_Exit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

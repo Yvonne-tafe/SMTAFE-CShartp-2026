@@ -27,7 +27,7 @@ namespace Drone_Service_Application
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
             AddNewItem();
         }
@@ -66,7 +66,7 @@ namespace Drone_Service_Application
 
             if (!double.TryParse(txtServiceCost.Text, out serviceCost))
             {
-                txtStatus.Text = "Service Cost must be a number.";
+                CommonControls.SetStatus("Service Cost must be a number.");
                 return false;
             }
 
@@ -74,7 +74,7 @@ namespace Drone_Service_Application
 
             if (parts.Length == 2 && parts[1].Length > 2)
             {
-                txtStatus.Text = "Service Cost can only have two decimal places.";
+                CommonControls.SetStatus("Service Cost can only have two decimal places.");
                 return false;
             }
 

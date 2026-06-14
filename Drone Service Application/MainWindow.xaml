@@ -8,28 +8,30 @@
         Title="Main Menu" Height="600
         " Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="17" Width="285"><Run FontFamily="Calibri" FontSize="16" Language="en-au" Text="Icarus Drone Service Application" Foreground="Blue" FontWeight="Bold"/></TextBlock>
+        <local:CommonControls x:Name="CommonControls" Grid.ColumnSpan="2" Margin="0,0,33,0"/>
         <Border  BorderBrush="LightGray" BorderThickness="2" CornerRadius="10" Padding="10" Margin="10,50,10,135" >
             <StackPanel>
-                <Button Content="Add New Drone" Margin="0,50,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click">
+                <Button Content="Add New Drone" Margin="0,20,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click_AddNewDrone">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <Button Content="Display Queues" Margin="0,20,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click_1">
+                <Button Content="Display Queues" Margin="0,20,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click_ShowQueues">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <Button Content="Display Final List" Margin="0,20,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click_2">
+                <Button Content="Display Final List" Margin="0,20,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click_ShowFinalList">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button Content="Exit" Margin="0,20,0,20" Width="300" FontSize="14" Height="50" Click="Button_Click_Exit">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
             </StackPanel>
         </Border>
-        <StatusBar Margin="24,473,23,69" Grid.ColumnSpan="2">
-            <TextBlock x:Name="txtStatus" Text="Status:" Width="500"/>
-        </StatusBar>
     </Grid>
 </Window>

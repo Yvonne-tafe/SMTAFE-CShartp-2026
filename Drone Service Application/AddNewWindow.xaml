@@ -6,11 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Drone_Service_Application"
         mc:Ignorable="d"
-        Title="Add New Drone" Height="450" Width="800">
+        Title="Add New Drone" Height="600" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="17" Width="285"><Run FontFamily="Calibri" FontSize="16" Language="en-au" Text="Icarus Drone Service Application" Foreground="Blue" FontWeight="Bold"/></TextBlock>
-        <GroupBox Header="Service Details" Margin="50,60,50,80
-                  " Padding="5" >
+        <local:CommonControls x:Name="CommonControls"/>
+        <GroupBox Header="Service Details" Margin="50,60,50,135" Padding="5" >
             <Grid Margin="10">
 
                 <Grid.RowDefinitions>
@@ -51,12 +50,9 @@
                     <RadioButton x:Name="rdoExpress" Content="Express"  GroupName="ServicePriority"/>
                 </StackPanel>
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="" Margin="5"/>
-                <Button Grid.Row="6" Grid.Column="1" Content="Add New Item" Margin="5" Width="119" HorizontalAlignment="Left" Click="Button_Click"/>
+                <Button Grid.Row="6" Grid.Column="1" Content="Add New Item" Margin="5" Width="119" HorizontalAlignment="Left" Click="Button_Click_Add"/>
 
             </Grid>
         </GroupBox>
-        <StatusBar Margin="24,473,23,69" Grid.ColumnSpan="2">
-            <TextBlock x:Name="txtStatus" Text="Status:" Width="500"/>
-        </StatusBar>
     </Grid>
 </Window>
