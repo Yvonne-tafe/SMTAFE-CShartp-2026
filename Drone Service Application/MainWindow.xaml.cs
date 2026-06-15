@@ -31,7 +31,6 @@ namespace Drone_Service_Application
         {
             InitializeComponent();
             CommonControls.ShowExitButton(false);
-            TestData();
         }
         
         //Click to Add new drone item
@@ -63,51 +62,6 @@ namespace Drone_Service_Application
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        // TestData is used for debugging only. Disable before final submission.
-        private void TestData()
-        {
-            Drone newDrone = new Drone();
-            newDrone.SetClientName("Test1");
-            newDrone.SetDroneModel("TestModel1");
-            newDrone.SetServiceCost(100);
-            newDrone.SetServiceProblem("Test Problem 1");
-            newDrone.SetServiceTag(100);
-            _regularService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test2");
-            newDrone.SetDroneModel("TestModel2");
-            newDrone.SetServiceCost(150);
-            newDrone.SetServiceProblem("Test Problem 2");
-            newDrone.SetServiceTag(110);
-            _regularService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test3");
-            newDrone.SetDroneModel("TestModel3");
-            newDrone.SetServiceCost(170);
-            newDrone.SetServiceProblem("Test Problem 3");
-            newDrone.SetServiceTag(120);
-            _regularService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test4");
-            newDrone.SetDroneModel("TestModel4");
-            newDrone.SetServiceCost(115);
-            newDrone.SetServiceProblem("Test Problem 4");
-            newDrone.SetServiceTag(130);
-            _expressService.Enqueue(newDrone);
-
-            newDrone = new Drone();
-            newDrone.SetClientName("Test5");
-            newDrone.SetDroneModel("TestModel5");
-            newDrone.SetServiceCost(175);
-            newDrone.SetServiceProblem("Test Problem 5");
-            newDrone.SetServiceTag(140);
-            _expressService.Enqueue(newDrone);
-            nextServiceTag = 150;
         }
     }
 }
