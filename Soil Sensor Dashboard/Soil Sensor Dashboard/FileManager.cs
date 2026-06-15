@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -36,8 +39,12 @@ namespace Soil_Sensor_Dashboard
                         throw new Exception($"Invalid data format at line {i + 1}.");
                     }
 
+                    //timestamp for different environments
+                    DateTime timestamp;
+                    DateTime.TryParseExact(parts[0], "M/d/yyyy H:m", CultureInfo.InvariantCulture, DateTimeStyles.None, out timestamp);
+
                     var data = new SensorData(
-                        DateTime.Parse(parts[0]),
+                        timestamp,
                         parts[1],
                         double.Parse(parts[2])
                     );
