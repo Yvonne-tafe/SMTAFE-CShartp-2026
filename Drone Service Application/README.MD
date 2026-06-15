@@ -43,24 +43,20 @@ The application allows users to:
 \## ⚡ Project Status: MVP (Minimum Viable Product)
 
 
-
-This project is currently in its Minimum Viable Product (MVP) stage. The core functionality required by the client has been implemented and basically tested.
-
-
-
-\### 🛠️ Current Focus \& Possible Future Improvements
+This application was developed as a Minimum Viable Product (MVP) to satisfy the assessment requirements. The core functionality has been implemented and tested.
 
 
 
-\- Identify possible runtime errors and add appropriate exception handling to improve system stability.
 
-\- Add more complete input validation to prevent invalid service data from being entered.
+\## ⚠️ Current Limitations
 
-\- Complete more detailed testing, including normal cases, invalid inputs, empty queues, and finished list removal.
+The current version of the Icarus Drone Service Application was developed as a Minimum Viable Product (MVP). Several limitations exist in the current implementation:
 
-\- Improve test evidence documentation with screenshots and expected/actual results.
+- All service data is stored in memory only. Data will be lost when the application is closed because no file or database persistence has been implemented.
+- The application is designed for a single user and does not support concurrent access or multi-user environments.
+- Basic input validation has been implemented for required fields and Service Cost values. Additional exception handling and more comprehensive validation could further improve system reliability.
+- The application uses Queue collections to manage service requests and does not currently provide search, filtering, sorting, or reporting functionality.
 
-\---
 
 
 
@@ -108,7 +104,11 @@ Icarus Drone Service Application/
 
 ├── CommonControls.cs
 
+├── CommonControls.xaml
+
 ├── Icarus Drone Service Application.csproj
+
+├── Drone Service Application.slnx
 
 │
 
@@ -207,10 +207,7 @@ or
 \### Add New Service
 
 
-
 Users can enter:
-
-
 
 \- Client Name
 
@@ -223,13 +220,11 @@ Users can enter:
 \- Priority (Regular or Express)
 
 
-
 The system automatically generates a Service Tag.
 
 
 
 \### Regular Service Queue
-
 
 
 Displays all Regular service requests in a ListView.
@@ -239,10 +234,7 @@ Displays all Regular service requests in a ListView.
 \### Express Service Queue
 
 
-
 Displays all Express service requests in a ListView.
-
-
 
 Express services automatically receive a 15% service cost increase.
 
@@ -250,11 +242,7 @@ Express services automatically receive a 15% service cost increase.
 
 \### Complete Service
 
-
-
 Users can complete a service request by removing the first item from the selected queue.
-
-
 
 The completed item is automatically transferred to the Finished Service List.
 
@@ -262,10 +250,7 @@ The completed item is automatically transferred to the Finished Service List.
 
 \### Finished Service List
 
-
-
 Displays completed services using the format:
-
 
 
 ```text
@@ -274,11 +259,7 @@ Client Name - $Service Cost
 
 ```
 
-
-
 Double-clicking a completed service removes it from the list after collection and payment.
-
-
 
 \---
 
@@ -286,10 +267,7 @@ Double-clicking a completed service removes it from the list after collection an
 
 \## 🛠️ Maintenance Notes
 
-
-
 Future developers should follow the existing separation of responsibilities:
-
 
 
 \- MainWindow manages application navigation and shared data structures.
@@ -306,8 +284,6 @@ Future developers should follow the existing separation of responsibilities:
 
 When modifying the application:
 
-
-
 \- Maintain Queue<T> usage for Regular and Express services.
 
 \- Maintain List<T> usage for Finished Services.
@@ -315,7 +291,6 @@ When modifying the application:
 \- Ensure Service Tags remain unique and increment by 10, and the minimum value is 100, maximum is 900.
 
 \- Preserve Express Service pricing rules (+15%).
-
 
 
 \---
