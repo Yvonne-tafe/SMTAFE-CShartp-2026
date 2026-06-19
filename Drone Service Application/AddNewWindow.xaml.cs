@@ -127,6 +127,12 @@ namespace Drone_Service_Application
                 resultMsg="Service Cost must be a number.";
                 return false;
             }
+            //check if negative
+            if (serviceCost<0)
+            {
+                resultMsg = "Service Cost must not be negative.";
+                return false;
+            }
 
             string[] parts = txtServiceCost.Text.Split('.');
 
