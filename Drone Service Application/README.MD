@@ -76,10 +76,6 @@ Icarus Drone Service Application.sln
 
 Icarus Drone Service Application/
 
-│
-
-├── Properties/
-
 ├── App.xaml
 
 ├── App.xaml.cs
