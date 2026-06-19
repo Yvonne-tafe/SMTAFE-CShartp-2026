@@ -67,15 +67,17 @@ To ensure the application runs correctly, the required sensor data files (`.csv`
 \### Required File 
 
 Once the project is successfully built, copy and paste the required `.csv` files into the following execution directory:
-	`Soil Sensor Dashboard\\Soil Sensor Dashboard\\bin\\Debug\\net10.0-windows\\`
+	`Soil Sensor Dashboard\Soil Sensor Dashboard\bin\Debug\net10.0-windows\`
 
 
-The directory \*\*must\*\* contain the following four CSV files along with the executable (`.exe`):
+The directory \*\*must\*\* contain the following four CSV files and one storage folder along with the executable (`.exe`):
 
 1\. \*\*sensor1\_all.csv\*\* - Historical data for Sensor 1
 2\. \*\*sensor2\_all.csv\*\* - Historical data for Sensor 2
 3\. \*\*sensor3\_all.csv\*\* - Historical data for Sensor 3
 4\. \*\*SensorFiles.csv\*\* - Main sensor index/configuration file
+5\. \*\*StoreData\*\* - Folder for data storage
+
 
 
 
