@@ -14,7 +14,7 @@
                 <!--
                 Feature: The service items must be displayed in a ListView which displays all the class attributes.
                 -->
-                    <ListView x:Name="lvRegularService" Height="120" Margin="10">
+                    <ListView x:Name="lvRegularService" Height="120" Margin="10" SelectionChanged="Mouse_Click_InfoPage">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Client Name" Width="120" DisplayMemberBinding="{Binding ClientName}"/>
@@ -39,7 +39,7 @@
                 <!--
                 Feature: The service items must be displayed in a ListView which displays all the class attributes.
                 -->
-                <ListView x:Name="lvExpressService" Height="120" Margin="5">
+                <ListView x:Name="lvExpressService" Height="120" Margin="5" SelectionChanged="Mouse_Click_InfoPage">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Client Name" Width="120" DisplayMemberBinding="{Binding ClientName}"/>

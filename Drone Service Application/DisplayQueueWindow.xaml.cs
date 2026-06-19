@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace Drone_Service_Application
 {
@@ -105,7 +107,7 @@ namespace Drone_Service_Application
                 });
             }
         }
-
+   
         private void RefreshRegularService()
         {
             lvRegularService.Items.Clear();
@@ -128,6 +130,28 @@ namespace Drone_Service_Application
                 resultMsg = "Service Queue is empty.";
                 return true;
             }
+        }
+        //6.12	Create a mouse click method for the regular service ListView that will display the Client Name and Service Problem in the related textboxes.
+        //6.13	Create a mouse click method for the express service ListView that will display the Client Name and Service Problem in the related textboxes.
+        private void Mouse_Click_InfoPage(object sender, SelectionChangedEventArgs e)
+        {
+            ListView listView = sender as ListView;
+            if (listView != null && listView.SelectedItem != null)
+            {
+                dynamic selectedDrone = listView.SelectedItem;
+                string clientName = selectedDrone.ClientName;
+                string serviceProblem = selectedDrone.ServiceProblem;
+
+                RequirementInfo droneInfo = new RequirementInfo(clientName, serviceProblem);
+                droneInfo.ShowDialog();
+
+                listView.SelectedIndex = -1;
+            }
+            else
+            {
+                CommonControls.SetStatus($"Error occurs with the selected Drone.");
+            }
+
         }
 
     }

@@ -1,0 +1,34 @@
+﻿<Window x:Class="Drone_Service_Application.RequirementInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Drone_Service_Application"
+        mc:Ignorable="d"
+        Title="Drone Info" Height="400" Width="800">
+    <Grid>
+        <local:CommonControls x:Name="CommonControls"/>
+        <GroupBox Header="Service Details" Margin="50,60,50,135" Padding="5" >
+            <Grid Margin="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Client Name:"  Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" x:Name="txtClientName"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"  Text="Service Problem:" Margin="5"/>
+                <!--
+        Feature: The input for the Service Problem must be a multi-lined textbox.
+        -->
+                <TextBox Grid.Row="2" Grid.Column="1" Height="60"  AcceptsReturn="True" Margin="5" x:Name="txtServiceProblem"/>
+                
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

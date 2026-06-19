@@ -22,9 +22,9 @@ The application allows users to:
 
 \- Increase service cost by 15% for Express services.
 
-\- View all Regular service items.
+\- View all Regular and Express service items.
 
-\- View all Express service items.
+\- Click service item in Regular and Express in queue to see client name and service problem in a new dialog.
 
 \- Complete service requests by removing them from the service queue.
 
@@ -99,6 +99,10 @@ Icarus Drone Service Application/
 ├── DisplayFinalListWindow.xaml
 
 ├── DisplayFinalListWindow.xaml.cs
+
+├── RequirementInfo.xaml
+
+├── RequirementInfo.xaml.cs
 
 ├── Drone.cs
 
@@ -229,6 +233,8 @@ The system automatically generates a Service Tag.
 
 Displays all Regular service requests in a ListView.
 
+Click service item to display the Client Name and Service Problem in the related textboxes.
+
 
 
 \### Express Service Queue
@@ -237,6 +243,9 @@ Displays all Regular service requests in a ListView.
 Displays all Express service requests in a ListView.
 
 Express services automatically receive a 15% service cost increase.
+
+Click service item to display the Client Name and Service Problem in the related textboxes.
+
 
 
 
@@ -275,6 +284,8 @@ Future developers should follow the existing separation of responsibilities:
 \- AddNewWindow manages service creation and validation.
 
 \- DisplayQueueWindow manages service queue processing.
+
+\- RequirementInfo manages display of client name and service problem.
 
 \- DisplayFinalListWindow manages completed service.
 
