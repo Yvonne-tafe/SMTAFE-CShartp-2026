@@ -420,25 +420,26 @@ namespace Soil_Sensor_Dashboard
         /// </summary>
         private bool BoundSetupValidation()
         {
+            double tempLower;
+            double tempUpper;
             if (string.IsNullOrWhiteSpace(TBLowerBound.Text) || string.IsNullOrWhiteSpace(TBUpperBound.Text))
             {
                 messageService.ShowError("Please enter both lower bound and upper bound.");
                 return false;
             }
 
-            if (!double.TryParse(TBLowerBound.Text, out double tempLower))
+            if (!double.TryParse(TBLowerBound.Text, out tempLower))
             {
                 messageService.ShowError("Lower bound must be a number.");
                 return false;
             }
 
-            if (!double.TryParse(TBUpperBound.Text, out double tempUpper))
+            if (!double.TryParse(TBUpperBound.Text, out tempUpper))
             {
                 messageService.ShowError("Upper bound must be a number.");
                 return false;
             }
-
-            if (lowerBound >= upperBound)
+            if (tempLower >= tempUpper)
             {
                 messageService.ShowError("Lower bound must be less than upper bound.");
                 return false;
